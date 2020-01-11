@@ -1,0 +1,7 @@
+{
+    "arguments": [{
+        "name": "strength",
+        "default": 4,
+        "type": "double"
+    }]
+}
