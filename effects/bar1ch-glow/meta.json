@@ -17,7 +17,7 @@
         "type": "int"
     }, {
         "name": "bar_strength",
-        "default": 4,
+        "default": 12,
         "type": "double"
     }, {
         "name": "glow_strength",
