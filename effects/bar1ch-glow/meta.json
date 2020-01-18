@@ -10,11 +10,20 @@
     }, {
         "name": "background_opacity",
         "default": 0.7,
-        "type": "double"
+        "type": "double",
+        "max":1,
+        "min":0
+    }, {
+        "name": "height_ratio",
+        "default": 1.0,
+        "type": "double",
+        "max":1,
+        "min":0
     }, {
         "name": "glow_radius",
         "default": 20,
-        "type": "int"
+        "type": "int",
+        "min":0
     }, {
         "name": "bar_strength",
         "default": 12,

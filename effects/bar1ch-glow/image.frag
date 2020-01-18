@@ -8,6 +8,7 @@
 #define glow_strength    $glow_strength 
 #define glow_strength2   $glow_strength2 
 #define bar_strength     $bar_strength 
+#define height_ratio     $height_ratio     
 
 vec4 bar(float id){
     float unit_size=pixel_empty+pixel_fill;
@@ -28,7 +29,7 @@ vec4 draw_bar(vec2 fragCoord){
     float h=fragCoord.y/iResolution.y;
     vec4 b=bar(id);
     float max_=b.a;
-    if(h>max_)
+    if(h>max_*height_ratio)
         return vec4(0,0,0,0);
     vec3 rgb=b.rgb;
     return vec4(rgb*max_,max_);
@@ -39,7 +40,7 @@ float bar_dist(float id,vec2 fragCoord){
     vec4 b=bar(id);
     float max_=b.a;
     float h=fragCoord.y/iResolution.y;
-    if(h<=max_){
+    if(h<=max_*height_ratio){
         if(fragCoord.x< id*unit_size)
             return id*unit_size-fragCoord.x;
         if(fragCoord.x< id*unit_size+pixel_fill )
@@ -48,11 +49,11 @@ float bar_dist(float id,vec2 fragCoord){
             return fragCoord.x -id*unit_size-pixel_fill;
     }else{
         if(fragCoord.x< id*unit_size)
-            return length(fragCoord- vec2(id*unit_size,max_*iResolution.y));
+            return length(fragCoord- vec2(id*unit_size,max_*iResolution.y*height_ratio));
         if(fragCoord.x< id*unit_size+pixel_fill )
-            return fragCoord.y-max_*iResolution.y;
+            return fragCoord.y-max_*iResolution.y*height_ratio;
         else
-            return length(fragCoord- vec2(id*unit_size+pixel_fill,max_*iResolution.y));
+            return length(fragCoord- vec2(id*unit_size+pixel_fill,max_*iResolution.y*height_ratio));
     }
 
 }
