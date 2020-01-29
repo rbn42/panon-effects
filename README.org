@@ -7,7 +7,8 @@ mv panon-effects/effects/* ~/.config/panon/
 Minimum required version of panon is 0.3.1.
 
 ** Credits
-| Files                                                                                         | Source                                                           | Licensed under                                       |
-|-----------------------------------------------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------|
-| [[file:effects/example-shadertoy.frag][example-shadertoy.frag]]                               | copied from [[https://www.shadertoy.com/view/lldyDs][shadertoy]] | [[https://www.shadertoy.com/terms][CC BY-NC-SA 3.0]] |
-| [[file:effects/example-shadertoy-fractal-tiling.frag][example-shadertoy-fractal-tiling.frag]] | copied from [[https://www.shadertoy.com/view/Ml2GWy][shadertoy]] | [[https://www.shadertoy.com/terms][CC BY-NC-SA 3.0]] |
+| Files                                                                                         | Source                                                            | Licensed under                                       |
+|-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------+------------------------------------------------------|
+| [[file:effects/example-shadertoy.frag][example-shadertoy.frag]]                               | copied from [[https://www.shadertoy.com/view/lldyDs][shadertoy]]  | [[https://www.shadertoy.com/terms][CC BY-NC-SA 3.0]] |
+| [[file:effects/example-shadertoy-fractal-tiling.frag][example-shadertoy-fractal-tiling.frag]] | copied from [[https://www.shadertoy.com/view/Ml2GWy][shadertoy]]  | [[https://www.shadertoy.com/terms][CC BY-NC-SA 3.0]] |
+| [[file:effects/comet/image.frag][comet/image.frag]]                                           | adapted from [[https://www.shadertoy.com/view/lldyDs][shadertoy]] | [[https://www.shadertoy.com/terms][CC BY-NC-SA 3.0]] |
