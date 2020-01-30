@@ -3,13 +3,15 @@
 #define background_opacity $background_opacity 
 #define max_life_time 100
 #define glow_strength $glow_strength
+#define bar_strength $bar_strength
+#define particle_strength $particle_strength
 #define pixel_fill $bar_width
 #define pixel_empty $gap_width
 #define height_ratio $height_ratio 
 
 vec4 drawSnow(vec2 fragCoord ) {
     vec4 fragColor=vec4(0,0,0,0);
-    for(int j=-100;j<100;j++){
+    for(int j=-40;j<40;j++){
         vec2 fragCoord2=fragCoord;
         fragCoord2.x+=j;
         vec3 rgb=getRGB(fragCoord2.x/iResolution.x);
@@ -17,11 +19,11 @@ vec4 drawSnow(vec2 fragCoord ) {
             vec4 data= texelFetch(iChannel2,ivec2(fragCoord2.x,i) , 0);
             if(data.g*255.>max_life_time )break;
             float speed_y=(data.r*2+1)/3.;
-            float speed_x=80*data.b-40;
+            float speed_x=80*(2*data.b-1);
             float h=data.g*speed_y; 
             h=pow(0.000001, h)*iResolution.y*1.4;
             float dist=length(fragCoord-vec2(fragCoord2.x+data.g*speed_x,h));
-            float alpha= data.r*(1-data.g*255./max_life_time)*1.0 /pow(dist ,glow_strength ) ;
+            float alpha= (data.r)*(1-data.g*255./max_life_time)*1.0 /pow(dist ,glow_strength ) ;
             fragColor+=  vec4(rgb*alpha,alpha);
         }
     }
@@ -48,6 +50,6 @@ float drawBar( vec2 fragCoord ) {
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
-    fragColor=drawSnow(fragCoord)+drawBar(fragCoord);//+drawLine(fragCoord);
+    fragColor=drawSnow(fragCoord)*particle_strength +drawBar(fragCoord)*bar_strength ;//+drawLine(fragCoord);
     fragColor.a+=background_opacity;
 }

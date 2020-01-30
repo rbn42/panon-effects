@@ -9,15 +9,23 @@
         "type": "int"
     }, {
         "name": "height_ratio",
-        "default": 0.5,
+        "default": 0.8,
         "type": "double"
     }, {
         "name": "background_opacity",
         "default": 0.7,
         "type": "double"
     }, {
+        "name": "bar_strength",
+        "default": 0.5,
+        "type": "double"
+    }, {
+        "name": "particle_strength",
+        "default": 3.0,
+        "type": "double"
+    }, {
         "name": "glow_strength",
-        "default": 0.8,
+        "default": 1.1,
         "type": "double"
     }]
 }
