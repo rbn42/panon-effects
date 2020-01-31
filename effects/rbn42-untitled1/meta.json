@@ -5,7 +5,7 @@
         "type": "int"
     }, {
         "name": "gap_width",
-        "default": 4,
+        "default": 2,
         "type": "int"
     }, {
         "name": "height_ratio",
@@ -21,11 +21,11 @@
         "type": "double"
     }, {
         "name": "particle_strength",
-        "default": 3.0,
+        "default": 2.5,
         "type": "double"
     }, {
         "name": "glow_strength",
-        "default": 1.1,
+        "default": 1,
         "type": "double"
     }]
 }
