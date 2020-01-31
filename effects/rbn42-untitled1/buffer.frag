@@ -1,17 +1,11 @@
 #version 130
 
-/*
- * 要点,确保稀疏
- * 在xy方向,确保一个点的生成是稀疏的.
- */
-
-#define energy_speed 0.1
-
-#define immune_radius 5
-#define immune_frame 10
+#define immune_radius $immune_radius 
+#define immune_frame $immune_frame 
 #define threshold1 $threshold1 
 #define threshold2 $threshold2
 #define threshold3 $threshold3
+
 float rand(vec2 co) {
     return fract(sin(dot(co.xy,vec2(12.9898,78.233))) * 43758.5453);
 }

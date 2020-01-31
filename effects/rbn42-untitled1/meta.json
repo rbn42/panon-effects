@@ -21,7 +21,7 @@
         "type": "int"
     }, {
         "name": "immune_frame",
-        "default": 20,
+        "default": 15,
         "type": "int"
     }, {
         "name": "threshold1",
