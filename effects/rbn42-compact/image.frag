@@ -53,10 +53,7 @@
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
-    fragColor=vec4(0,0,0,background_opacity);
-
-    ivec2 rect_start=ivec2(fragCoord)-100;
-    ivec2 rect_end=rect_start+200;
+    fragColor=vec4(0,0,0,0);
 
     for(int line=int(fragCoord.x-glow_radius)/gap_line ;
             line<int(fragCoord.x+glow_radius)/gap_line ;
@@ -75,6 +72,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         }
     }
 
+    fragColor.a+=background_opacity;
 
    
 }
