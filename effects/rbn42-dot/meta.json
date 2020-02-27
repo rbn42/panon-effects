@@ -1,0 +1,30 @@
+{
+    "arguments": [{
+        "name": "gap_width",
+        "default": 5,
+        "type": "int"
+    }, {
+        "name": "gap_height",
+        "default": 5,
+        "type": "int"
+    }, {
+        "name": "background_opacity",
+        "default": 0.7,
+        "type": "double",
+        "max":1,
+        "min":0
+    }, {
+        "name": "glow_radius",
+        "default": 50,
+        "type": "int",
+        "min":0
+    }, {
+        "name": "glow_strength",
+        "default": 2,
+        "type": "double"
+    }, {
+        "name": "glow_strength2",
+        "default": 1.7,
+        "type": "double"
+    }]
+}
