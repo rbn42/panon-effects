@@ -8,9 +8,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     float[] rels=float[5](4.,3.,2.,1.,.5);
     float[] alphas=float[5](.1,.2,.3,.5,1.);
-    //float[] rels=float[1](1.0);
-    //float[] alphas=float[1](1.0);
-    fragColor=vec4(0.001,0.001,0.001,0.001);
+    fragColor=vec4(0,0,0,0);
     for (int i=0; i<5; i++) {
         float r=rels[i];
         float a=alphas[i];

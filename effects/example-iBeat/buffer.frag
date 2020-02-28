@@ -1,6 +1,6 @@
 #version 130
 
-#define beatDecay 0.02
+#define beatDecay $beat_decay
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     if(fragCoord.x<1 && fragCoord.y<1) {
