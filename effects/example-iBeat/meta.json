@@ -1,7 +1,7 @@
 {
     "arguments": [{
         "name": "beat_decay",
-        "default": 0.02,
+        "default": 0.04,
         "type": "double"
     }]
 }
