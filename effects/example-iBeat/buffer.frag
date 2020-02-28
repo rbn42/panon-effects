@@ -3,7 +3,7 @@
 #define beatDecay $beat_decay
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
-    if(int(fragCoord.x)==0 && int(fragCoord.y)==0) {
+    if(fragCoord.x==0 && fragCoord.y==0) {
         fragColor.a=1;
         if(iBeat>0)
             fragColor.r=1;
