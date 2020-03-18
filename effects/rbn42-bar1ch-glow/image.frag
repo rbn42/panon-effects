@@ -44,7 +44,7 @@ float bar_dist(float id,vec2 fragCoord){
         if(fragCoord.x< id*unit_size)
             return id*unit_size-fragCoord.x;
         if(fragCoord.x< id*unit_size+pixel_fill )
-            return 100000;
+            return 100000.0;
         else
             return fragCoord.x -id*unit_size-pixel_fill;
     }else{
