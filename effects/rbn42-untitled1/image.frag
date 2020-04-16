@@ -43,10 +43,10 @@ float drawBar( vec2 fragCoord ) {
 
         vec4 sample1= texture(iChannel1, vec2(x,0)) ;
         float max_=sample1.g*.5+sample1.r*.5;
-        if(h<=max_*height_ratio)
-            return 1.0;//vec4(1,1,1,1);
+        if(h<max_*height_ratio)
+            return 1.0;
     }
-    return 0.0;//;
+    return 0.0;
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
