@@ -1,7 +1,7 @@
 {
     "arguments": [{
         "name": "from_color",
-        "default": "#f80",
+        "default": "#6bff2b",
         "type": "color"
     }, {
         "name": "to_color",
