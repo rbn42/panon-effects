@@ -1,5 +1,13 @@
 {
     "arguments": [{
+        "name": "from_color",
+        "default": "#f80",
+        "type": "color"
+    }, {
+        "name": "to_color",
+        "default": "#08f",
+        "type": "color"
+    }, {
         "name": "unit_width",
         "default": 6,
         "type": "int"
