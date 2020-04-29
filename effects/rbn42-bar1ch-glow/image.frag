@@ -72,5 +72,6 @@ vec4 draw_glow(vec2 fragCoord){
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     fragColor=draw_bar(fragCoord)*bar_strength+draw_glow(fragCoord)*glow_strength;
-    fragColor+=background_color_and_opacity;
+    fragColor.rgb+=background_color_and_opacity.rgb*background_color_and_opacity.a;
+    fragColor.a+=background_color_and_opacity.a;
 }

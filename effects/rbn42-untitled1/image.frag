@@ -48,5 +48,6 @@ float drawBar( vec2 fragCoord ) {
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     fragColor=drawSnow(fragCoord)*particle_strength +drawBar(fragCoord)*bar_strength ;//+drawLine(fragCoord);
-    fragColor+=background_color_and_opacity;
+    fragColor.rgb+=background_color_and_opacity.rgb*background_color_and_opacity.a;
+    fragColor.a+=background_color_and_opacity.a;
 }
