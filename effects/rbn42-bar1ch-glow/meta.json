@@ -8,11 +8,9 @@
         "default": 6,
         "type": "int"
     }, {
-        "name": "background_opacity",
-        "default": 0.7,
-        "type": "double",
-        "max":1,
-        "min":0
+        "name": "background_color_and_opacity",
+        "default": "#A0000000",
+        "type": "color"
     }, {
         "name": "height_ratio",
         "default": 1.0,

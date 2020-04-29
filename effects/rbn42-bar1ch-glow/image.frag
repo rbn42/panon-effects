@@ -3,7 +3,7 @@
 #define pixel_fill $bar_width
 #define pixel_empty $gap_width
 
-#define background_opacity $background_opacity 
+#define background_color_and_opacity $background_color_and_opacity 
 #define glow_radius      $glow_radius     
 #define glow_strength    $glow_strength 
 #define glow_strength2   $glow_strength2 
@@ -72,5 +72,5 @@ vec4 draw_glow(vec2 fragCoord){
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     fragColor=draw_bar(fragCoord)*bar_strength+draw_glow(fragCoord)*glow_strength;
-    fragColor.a+=background_opacity;
+    fragColor+=background_color_and_opacity;
 }
