@@ -1,6 +1,6 @@
 #version 130
 
-#define background_opacity $background_opacity
+#define background_color_and_opacity $background_color_and_opacity
 #define max_life_time 100
 #define glow_strength $glow_strength
 #define bar_strength $bar_strength
@@ -48,5 +48,5 @@ float drawBar( vec2 fragCoord ) {
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     fragColor=drawSnow(fragCoord)*particle_strength +drawBar(fragCoord)*bar_strength ;//+drawLine(fragCoord);
-    fragColor.a+=background_opacity;
+    fragColor+=background_color_and_opacity;
 }
