@@ -1,0 +1,11 @@
+{
+    "arguments": [{
+        "name": "line_color",
+        "default": "#f8f",
+        "type": "color"
+    }, {
+        "name": "speed",
+        "default": 0.4,
+        "type": "double"
+    }]
+}
