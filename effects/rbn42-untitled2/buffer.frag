@@ -47,7 +47,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         for(int i1=-blur_radius; i1<1+blur_radius; i1++)
             for(int i2=-blur_radius; i2<1+blur_radius; i2++)
                 fragColor+=texelFetch(iChannel2,ivec2(fragCoord+vec2(i1-move_step,i2)), 0)/(1+2*blur_radius)/(1+2*blur_radius)*(1-decay);
-    fragColor.a=1;
+//    fragColor.a=1;
 }
 
 
