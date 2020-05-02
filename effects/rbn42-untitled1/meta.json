@@ -13,7 +13,7 @@
         "type": "double"
     }, {
         "name": "background_color_and_opacity",
-        "default": "#A0000000",
+        "default": "#E0000000",
         "type": "color"
     }, {
         "name": "immune_radius",
