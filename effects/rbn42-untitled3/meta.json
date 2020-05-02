@@ -1,5 +1,9 @@
 {
     "arguments": [{
+        "name": "dual_channel",
+        "default": false,
+        "type": "bool"
+    }, {
         "name": "laser_threshold",
         "default": 0.5,
         "type": "double",
