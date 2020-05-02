@@ -23,12 +23,12 @@
         "max":180
     }, {
         "name": "strength1",
-        "default": 0.15,
+        "default": 0.1,
         "type": "double",
         "min":0
     }, {
         "name": "strength2",
-        "default": 2,
+        "default": 1.6,
         "type": "double",
         "min":0
     }]
