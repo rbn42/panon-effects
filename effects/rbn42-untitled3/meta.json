@@ -10,8 +10,13 @@
         "min":0,
         "max":1
     }, {
+        "name": "laser_width",
+        "default": 1.4,
+        "type": "double",
+        "min":0
+    }, {
         "name": "background_color_and_opacity",
-        "default": "#00000000",
+        "default": "#80000000",
         "type": "color"
     }, {
         "name": "min_arc",

@@ -5,6 +5,7 @@
 #define min_arc $min_arc
 #define max_arc $max_arc
 #define strength1 $strength
+#define laser_width $laser_width
 
 #define dual_channel $dual_channel
 
@@ -42,15 +43,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
             vec2 p2=vec2(p1.x,0)+(updown?1:-1)*p1.y*vec2(cos(arc),sin(arc));
 
             float dist=length(fragCoord-p2);
-            //float alpha= samplef* max(1-dist,0);
-            //float alpha= samplef/ pow(dist,strength2)*strength1;
-            float alpha= samplef *(dist<1?1:(dist<1.2?5*(1.2-dist):0))*strength1; // pow(dist,strength2)*strength1;
+            float alpha=dist<(laser_width/2.0-0.5)?1:(dist<(laser_width/2.0+0.5)?(laser_width/2.0+0.5-dist):0);
+            alpha= samplef *strength1* alpha;
             if(alpha>fragColor.a){
                 fragColor.rgb=getRGB(p1.x/iResolution.x)*alpha; 
                 fragColor.a=alpha;
             }
-            //fragColor.rgb+=getRGB(p1.x/iResolution.x)*alpha; 
-            //fragColor.a+=alpha;
         }
 
     }
