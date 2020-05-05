@@ -11,7 +11,7 @@
         "max":1
     }, {
         "name": "background_color_and_opacity",
-        "default": "#E0000000",
+        "default": "#00000000",
         "type": "color"
     }, {
         "name": "min_arc",
@@ -26,13 +26,8 @@
         "min":0,
         "max":180
     }, {
-        "name": "strength1",
-        "default": 0.3,
-        "type": "double",
-        "min":0
-    }, {
-        "name": "strength2",
-        "default": 2.0,
+        "name": "strength",
+        "default": 2,
         "type": "double",
         "min":0
     }, {

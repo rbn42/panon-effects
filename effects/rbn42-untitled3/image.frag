@@ -4,8 +4,7 @@
 
 #define min_arc $min_arc
 #define max_arc $max_arc
-#define strength1 $strength1
-#define strength2 $strength2
+#define strength1 $strength
 
 #define dual_channel $dual_channel
 
@@ -44,9 +43,14 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
             float dist=length(fragCoord-p2);
             //float alpha= samplef* max(1-dist,0);
-            float alpha= samplef/ pow(dist,strength2)*strength1;
-            fragColor.rgb+=getRGB(p1.x/iResolution.x)*alpha; 
-            fragColor.a+=alpha;
+            //float alpha= samplef/ pow(dist,strength2)*strength1;
+            float alpha= samplef *(dist<1?1:(dist<1.2?5*(1.2-dist):0))*strength1; // pow(dist,strength2)*strength1;
+            if(alpha>fragColor.a){
+                fragColor.rgb=getRGB(p1.x/iResolution.x)*alpha; 
+                fragColor.a=alpha;
+            }
+            //fragColor.rgb+=getRGB(p1.x/iResolution.x)*alpha; 
+            //fragColor.a+=alpha;
         }
 
     }
