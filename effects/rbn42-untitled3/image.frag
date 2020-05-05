@@ -9,6 +9,7 @@
 
 #define dual_channel $dual_channel
 
+#define N1 $N1
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     //fragCoord.y+=1;
@@ -32,9 +33,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         int y=int(pow(fragCoord.y*fragCoord.y+x*x,0.5));
         for(p1.y=y-3;p1.y<y+4;p1.y++){
             if(p1.y>iResolution.y)continue;
-            //vec4 samplev= texelFetch(iChannel2,ivec2(p1.x,int(p1.y*p1.y/iResolution.y)), 0);
-            vec4 samplev= texelFetch(iChannel2,p1, 0);
-            float arc=((max_arc-min_arc)*samplev.b+min_arc)/180*3.14;
+            vec4 samplev= texelFetch(iChannel2,ivec2(p1.x,p1.y*p1.y/iResolution.y), 0);
+            float arc=((max_arc-min_arc)*fract(-p1.x/N1)+min_arc)/180*3.14;
             float samplef;
             if(dual_channel)
                 samplef=updown?samplev.r:samplev.g;
