@@ -12,6 +12,10 @@
         "default": 0.8,
         "type": "double"
     }, {
+        "name": "bar_color_and_opacity",
+        "default": "#80FFFFFF",
+        "type": "color"
+    }, {
         "name": "background_color_and_opacity",
         "default": "#E0000000",
         "type": "color"
@@ -34,10 +38,6 @@
     }, {
         "name": "threshold3",
         "default": 0.2,
-        "type": "double"
-    }, {
-        "name": "bar_strength",
-        "default": 0.5,
         "type": "double"
     }, {
         "name": "particle_strength",

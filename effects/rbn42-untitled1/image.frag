@@ -3,7 +3,7 @@
 #define background_color_and_opacity $background_color_and_opacity
 #define max_life_time 100
 #define glow_strength $glow_strength
-#define bar_strength $bar_strength
+#define bar_color_and_opacity $bar_color_and_opacity
 #define particle_strength $particle_strength
 #define pixel_fill $bar_width
 #define pixel_empty $gap_width
@@ -47,7 +47,8 @@ float drawBar( vec2 fragCoord ) {
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
-    fragColor=drawSnow(fragCoord)*particle_strength +drawBar(fragCoord)*bar_strength ;//+drawLine(fragCoord);
+    fragColor=drawSnow(fragCoord)*particle_strength;
+    fragColor+=drawBar(fragCoord)*vec4(bar_color_and_opacity.rgb*bar_color_and_opacity.a, bar_color_and_opacity.a );
     fragColor.rgb+=background_color_and_opacity.rgb*background_color_and_opacity.a;
     fragColor.a+=background_color_and_opacity.a;
 }
