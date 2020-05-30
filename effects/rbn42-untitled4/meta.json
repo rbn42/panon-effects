@@ -12,6 +12,10 @@
         "default": 1,
         "type": "float"
     }, {
+        "name": "N2",
+        "default": 2,
+        "type": "float"
+    }, {
         "name": "N3",
         "default": 1,
         "type": "float"
