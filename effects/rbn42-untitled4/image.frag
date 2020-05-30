@@ -10,6 +10,8 @@
 #define color8 $color8
 #define color9 $color9
 
+#define background_color $background
+
 #define N1 $N1
 #define N2 $dot_size
 #define N3 $N3
@@ -32,5 +34,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         fragColor+=color_base* fun1(c1,vec2(fragCoord.x-iResolution.x/2.0,fragCoord.y));
     }
 
-    fragColor.a=1;
+    fragColor.a=max(fragColor.r,max(fragColor.g,max(fragColor.b,0)));
+    fragColor+=background_color;
 }

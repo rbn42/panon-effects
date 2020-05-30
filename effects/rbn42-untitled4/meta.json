@@ -4,6 +4,10 @@
         "default": 3,
         "type": "float"
     }, {
+        "name": "background",
+        "default": "#000",
+        "type": "color"
+    }, {
         "name": "N1",
         "default": 1,
         "type": "float"
