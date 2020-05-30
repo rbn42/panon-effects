@@ -11,7 +11,7 @@
 #define color9 $color9
 
 #define N1 $N1
-#define N2 $N2
+#define N2 $dot_size
 #define N3 $N3
 
 vec4[] colors=vec4[](color1,color2,color3,color4,color5,color6,color7,color8,color9);

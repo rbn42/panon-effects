@@ -1,11 +1,11 @@
 {
     "arguments": [{
-        "name": "N1",
-        "default": 1,
+        "name": "dot_size",
+        "default": 3,
         "type": "float"
     }, {
-        "name": "N2",
-        "default": 3,
+        "name": "N1",
+        "default": 1,
         "type": "float"
     }, {
         "name": "N3",
