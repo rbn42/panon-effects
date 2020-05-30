@@ -13,39 +13,39 @@
         "type": "float"
     }, {
         "name": "color1",
-        "default": "#a0ff0004",
+        "default": "#ff0004",
         "type": "color"
     }, {
         "name": "color2",
-        "default": "#a04800ff",
+        "default": "#4800ff",
         "type": "color"
     }, {
         "name": "color3",
-        "default": "#a000ff3b",
+        "default": "#00ff3b",
         "type": "color"
     }, {
         "name": "color4",
-        "default": "#a0ff00ae",
+        "default": "#ff00ae",
         "type": "color"
     }, {
         "name": "color5",
-        "default": "#a000d1ff",
+        "default": "#00d1ff",
         "type": "color"
     }, {
         "name": "color6",
-        "default": "#a000ffb7",
+        "default": "#00ffb7",
         "type": "color"
     }, {
         "name": "color7",
-        "default": "#a0c800ff",
+        "default": "#c800ff",
         "type": "color"
     }, {
         "name": "color8",
-        "default": "#a0aeff00",
+        "default": "#aeff00",
         "type": "color"
     }, {
         "name": "color9",
-        "default": "#a0ff8000",
+        "default": "#ff8000",
         "type": "color"
     }]
 }
