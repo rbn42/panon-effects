@@ -41,7 +41,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     float u = 0.;
 
     vec4 sample1= texture(iChannel1, vec2(s_x,0)) ;
-    u+=sample1.r*N5;
+    u+=(sample1.r+sample1.g)/2.0 *N5+0.01;
     
     
     beamWidth *= 1. + 2.5*u*(1. - cos(5.*PI*uv.x));
