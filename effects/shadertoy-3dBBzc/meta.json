@@ -1,0 +1,23 @@
+{
+    "arguments": [{
+        "name": "N1",
+        "default": 0.5,
+        "type": "double"
+    }, {
+        "name": "N2",
+        "default": -3.5,
+        "type": "double"
+    }, {
+        "name": "N3",
+        "default": 3,
+        "type": "double"
+    }, {
+        "name": "N4",
+        "default": 0.125,
+        "type": "double"
+    }, {
+        "name": "N5",
+        "default": 3,
+        "type": "double"
+    }]
+}
