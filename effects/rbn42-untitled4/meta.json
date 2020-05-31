@@ -2,7 +2,7 @@
     "arguments": [{
         "name": "dot_size",
         "default": 4,
-        "type": "float"
+        "type": "double"
     }, {
         "name": "background",
         "default": "#000",
@@ -10,19 +10,19 @@
     }, {
         "name": "N1",
         "default": 1,
-        "type": "float"
+        "type": "double"
     }, {
         "name": "N2",
         "default": 2,
-        "type": "float"
+        "type": "double"
     }, {
         "name": "N3",
         "default": 70,
-        "type": "float"
+        "type": "double"
     }, {
         "name": "N4",
         "default": 10,
-        "type": "float"
+        "type": "double"
     }, {
         "name": "color1",
         "default": "#ff0004",
