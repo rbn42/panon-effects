@@ -1,0 +1,11 @@
+{
+    "arguments": [{
+        "name": "N1",
+        "default": 1,
+        "type": "double"
+    }, {
+        "name": "N2",
+        "default": 2,
+        "type": "double"
+    }]
+}
