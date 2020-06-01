@@ -486,9 +486,9 @@ void dance1()
 	float twist = time;
     
     //左右膝
-    vec4 s1=texelFetch(iChannel2,ivec2(2,1), 0);
-    stance[KNEES].x= s1.g;
-    s1=texelFetch(iChannel2,ivec2(2,0), 0);
+    vec4 s1=texelFetch(iChannel2,ivec2(0,1), 0);
+    stance[KNEES].x=fract( iFrame/1000.0)*10.0; s1.g;
+    s1=texelFetch(iChannel2,ivec2(0,0), 0);
     stance[KNEES].z=s1.g;
     //左右脚
     s1=texelFetch(iChannel2,ivec2(3,1), 0);
@@ -499,18 +499,18 @@ void dance1()
     
     vec2 twistCircle = circle(twist*GR)*GR;
     
-    s1=texelFetch(iChannel2,ivec2(0,1), 0);
     //右纵
+    s1=texelFetch(iChannel2,ivec2(2,1), 0);
     stance[ELBOWS].x =mix(PI,-PI,s1.g); 
-    s1=texelFetch(iChannel2,ivec2(4,1), 0);
-    //右横
-    stance[ELBOWS].y =mix(1,-1,s1.g); 
-
-    s1=texelFetch(iChannel2,ivec2(0,0), 0);
     //左纵
+    s1=texelFetch(iChannel2,ivec2(2,0), 0);
     stance[ELBOWS].z =mix(PI,-PI,s1.g); 
+
+    //右横
     s1=texelFetch(iChannel2,ivec2(4,1), 0);
+    stance[ELBOWS].y =mix(1,-1,s1.g); 
     //左横
+    s1=texelFetch(iChannel2,ivec2(4,0), 0);
     stance[ELBOWS].w =mix(1,-1,s1.g); 
     
     //腕
