@@ -1,7 +1,7 @@
 {
     "arguments": [{
         "name": "dot_size",
-        "default": 4,
+        "default": 3.5,
         "type": "double"
     }, {
         "name": "background",
@@ -18,10 +18,6 @@
     }, {
         "name": "N3",
         "default": 70,
-        "type": "double"
-    }, {
-        "name": "N4",
-        "default": 10,
         "type": "double"
     }, {
         "name": "color1",

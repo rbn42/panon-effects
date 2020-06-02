@@ -16,15 +16,13 @@
 #define N1 $N1
 #define N2 $N2
 #define N3 $N3
-#define N4 $N4
 
 vec4[] colors=vec4[](color1,color2,color3,color4,color5,color6,color7,color8,color9);
 
 float fun1(vec4 _sample,vec2 fragCoord){
     fragCoord/=iResolution.y;
-    //fragCoord.x/=10;
-    vec2 p=vec2(_sample.g,_sample.b*N2); // /(_sample.r+0.001)*2.0)*iResolution.xy;
-    p.x*=N4;
+    vec2 p=vec2(_sample.g,_sample.b*N2); 
+    p.x*=iResolution.x/iResolution.y;
     return (1/pow(length(fragCoord-p )*N3, N1)*_sample.r);
 }
 
