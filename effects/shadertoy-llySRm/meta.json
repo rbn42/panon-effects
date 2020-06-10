@@ -1,0 +1,7 @@
+{
+    "arguments": [{
+        "name": "background",
+        "default": "#000",
+        "type": "color"
+    }]
+}
