@@ -3,5 +3,17 @@
         "name": "background",
         "default": "#000",
         "type": "color"
+    },{
+        "name": "N1",
+        "default": 400,
+        "type": "int"
+    },{
+        "name": "color1",
+        "default": "#334ccc",
+        "type": "color"
+    },{
+        "name": "speed",
+        "default": 4,
+        "type": "double"
     }]
 }
