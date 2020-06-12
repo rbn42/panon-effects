@@ -3,7 +3,9 @@
 #define M_PI 3.1415926535897932384626433832795
 
 #define background $background
-#define N1 $N1
+#define N4 $N4
+#define N5 $N5
+#define N6 $N6
 #define color1 $color1
 
 float random(vec2 co)
@@ -24,10 +26,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	vec2 uv = -0.5 + 1.0 * uvNorm;
     uv /= vec2(iResolution.y / iResolution.x, 1.);
 	   
-    for(float i=0.0; i<N1 ;i++){
+    for(float i=0.0; i<N4 ;i++){
         float f1 = mod(i * 0.101213, 0.28);   
         //float fft1 = texture(iChannel2, vec2(f1,0)).x;  
-        float fft1 = texelFetch(iChannel2,ivec2(f1*iResolution.x,0), 0).x;
+        float fft1 = texelFetch(iChannel2,ivec2(N5+f1*(N6-N5),0), 0).x;
         float r = (fft1 / 2.);
         float r1 = (fft1 / 8.) * random(vec2(uv));
         float a = random(vec2(i))*(M_PI*2.);      

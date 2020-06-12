@@ -5,15 +5,35 @@
         "type": "color"
     },{
         "name": "N1",
+        "default": 0.2,
+        "type": "double"
+    },{
+        "name": "N2",
+        "default": 0.6,
+        "type": "double"
+    },{
+        "name": "N3",
+        "default":1,
+        "type": "double"
+    },{
+        "name": "N4",
         "default": 400,
         "type": "int"
+    },{
+        "name": "N5",
+        "default":0,
+        "type": "double"
+    },{
+        "name": "N6",
+        "default":44,
+        "type": "double"
     },{
         "name": "color1",
         "default": "#334ccc",
         "type": "color"
     },{
-        "name": "speed",
-        "default": 4,
+        "name": "decay",
+        "default": 0.2,
         "type": "double"
     }]
 }
