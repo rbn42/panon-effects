@@ -27,12 +27,15 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     uv /= vec2(iResolution.y / iResolution.x, 1.);
 	   
     for(float i=0.0; i<N4 ;i++){
+        float a = random(vec2(i))*(M_PI*2.);      
+        if(length(vec2(cos(a),sin(a))-normalize(uv))>0.03)
+            continue;
+
         float f1 = mod(i * 0.101213, 0.28);   
         //float fft1 = texture(iChannel2, vec2(f1,0)).x;  
         float fft1 = texelFetch(iChannel2,ivec2(N5+f1*(N6-N5),0), 0).x;
         float r = (fft1 / 2.);
         float r1 = (fft1 / 8.) * random(vec2(uv));
-        float a = random(vec2(i))*(M_PI*2.);      
         vec2 center = vec2(cos(a), sin(a)) * r;
         vec2 center2 = vec2(cos(a), sin(a)) * r1;        
         float dist = length(uv - center);
