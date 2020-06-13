@@ -3,23 +3,23 @@
 #define pixel_fill $bar_width
 #define pixel_empty $gap_width
 
-#define background_color_and_opacity $background_color_and_opacity 
-#define glow_radius      $glow_radius     
-#define glow_strength    $glow_strength 
-#define glow_strength2   $glow_strength2 
-#define bar_strength     $bar_strength 
-#define height_ratio     $height_ratio     
+#define background_color_and_opacity $background_color_and_opacity
+#define glow_radius      $glow_radius
+#define glow_strength    $glow_strength
+#define glow_strength2   $glow_strength2
+#define bar_strength     $bar_strength
+#define height_ratio     $height_ratio
 
-vec4 bar(float id){
+vec4 bar(float id) {
+    vec4 sample1= texelFetch(iChannel2, ivec2(id,0),0) ;
+    float max_=sample1.g*.5+sample1.r*.5;
     float unit_size=pixel_empty+pixel_fill;
     float x=(id*unit_size/iResolution.x);
-    vec4 sample1= texture(iChannel1, vec2(x,0)) ;
-    float max_=sample1.g*.5+sample1.r*.5;
     vec3 rgb=getRGB(x);
     return vec4(rgb,max_);
 }
 
-vec4 draw_bar(vec2 fragCoord){
+vec4 draw_bar(vec2 fragCoord) {
     float unit_size=pixel_empty+pixel_fill;
     float id=floor(fragCoord.x / unit_size);
     float _offset=fract(fragCoord.x / unit_size);
@@ -35,19 +35,19 @@ vec4 draw_bar(vec2 fragCoord){
     return vec4(rgb*max_,max_);
 }
 
-float bar_dist(float id,vec2 fragCoord){
+float bar_dist(float id,vec2 fragCoord) {
     float unit_size=pixel_empty+pixel_fill;
     vec4 b=bar(id);
     float max_=b.a;
     float h=fragCoord.y/iResolution.y;
-    if(h<=max_*height_ratio){
+    if(h<=max_*height_ratio) {
         if(fragCoord.x< id*unit_size)
             return id*unit_size-fragCoord.x;
         if(fragCoord.x< id*unit_size+pixel_fill )
             return 100000.0;
         else
             return fragCoord.x -id*unit_size-pixel_fill;
-    }else{
+    } else {
         if(fragCoord.x< id*unit_size)
             return length(fragCoord- vec2(id*unit_size,max_*iResolution.y*height_ratio));
         if(fragCoord.x< id*unit_size+pixel_fill )
@@ -58,13 +58,13 @@ float bar_dist(float id,vec2 fragCoord){
 
 }
 
-vec4 draw_glow(vec2 fragCoord){
+vec4 draw_glow(vec2 fragCoord) {
     float unit_size=pixel_empty+pixel_fill;
     float id=floor(fragCoord.x / unit_size);
     vec4 out_=vec4(0,0,0,0);
-    for(int id_=-glow_radius;id_<1+glow_radius;id_++){
+    for(int id_=-glow_radius; id_<1+glow_radius; id_++) {
         vec4 b=bar(id+id_);
-        b.a/= pow(bar_dist(id+id_,fragCoord) ,glow_strength2 ) ;
+        b.a/= pow(bar_dist(id+id_,fragCoord),glow_strength2 ) ;
         out_+=vec4(b.rgb*b.a,b.a);
     }
     return out_;
@@ -72,6 +72,9 @@ vec4 draw_glow(vec2 fragCoord){
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     fragColor=draw_bar(fragCoord)*bar_strength+draw_glow(fragCoord)*glow_strength;
+
+    fragColor.a=0.0;
+
     fragColor.rgb+=background_color_and_opacity.rgb*background_color_and_opacity.a;
     fragColor.a+=background_color_and_opacity.a;
 }

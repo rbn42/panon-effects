@@ -9,11 +9,11 @@
         "type": "int"
     }, {
         "name": "background_color_and_opacity",
-        "default": "#E0000000",
+        "default": "#C0000000",
         "type": "color"
     }, {
         "name": "height_ratio",
-        "default": 1.0,
+        "default": 0.95,
         "type": "double",
         "max":1,
         "min":0
