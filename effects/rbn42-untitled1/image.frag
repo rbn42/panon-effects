@@ -15,7 +15,7 @@ vec4 drawSnow(vec2 fragCoord ) {
         vec2 fragCoord2=fragCoord;
         fragCoord2.x+=j;
         vec3 rgb=getRGB(fragCoord2.x/iResolution.x);
-        for(int i=1; i<iResolution.y; i++) {
+        for(int i=1; i<min(128.0,iResolution.y); i++) {
             vec4 data= texelFetch(iChannel2,ivec2(fragCoord2.x,i), 0);
             if(data.g*255.>max_life_time )break;
             float speed_y=(data.r*2+1)/3.;
