@@ -5,15 +5,15 @@
         "type": "color"
     },{
         "name": "N1",
-        "default": 0.2,
+        "default": 0.1,
         "type": "double"
     },{
         "name": "N2",
-        "default": 0.5,
+        "default": 1.3,
         "type": "double"
     },{
         "name": "N3",
-        "default":1,
+        "default":0.5,
         "type": "double"
     },{
         "name": "N4",
