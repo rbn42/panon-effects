@@ -28,6 +28,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     ivec2 p1;
     int max_radius=dual_channel? int(iResolution.y/2):int(iResolution.y);
+    max_radius= min(256,max_radius);
     for(int x=-max_radius;x<max_radius+1;x++){
         p1.x=int(fragCoord.x)+x;
         int y=int(pow(fragCoord.y*fragCoord.y+x*x,0.5));
