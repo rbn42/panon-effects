@@ -1,8 +1,8 @@
 #version 130
 
-#define immune_radius $immune_radius 
-#define immune_frame $immune_frame 
-#define threshold1 $threshold1 
+#define immune_radius $immune_radius
+#define immune_frame $immune_frame
+#define threshold1 $threshold1
 #define threshold2 $threshold2
 #define threshold3 $threshold3
 
@@ -26,8 +26,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     float rand_threshold=rand(vec2(fragCoord.x/1000.0,fract(iFrame/10000.0)));
 
     bool newSignal=(new_energy>threshold1)
-        || (acc_energy>1) && (new_energy>threshold2) && (rand_threshold>0.5)  
-        || (acc_energy>1) && (new_energy>threshold3) && (rand_threshold>0.9)  ;
+                   || (acc_energy>1) && (new_energy>threshold2) && (rand_threshold>0.5)
+                   || (acc_energy>1) && (new_energy>threshold3) && (rand_threshold>0.9)  ;
 
     if(newSignal)
         for(int offset_x=-immune_radius ; offset_x<immune_radius+1; offset_x++) {

@@ -30,15 +30,36 @@ vec4 drawSnow(vec2 fragCoord ) {
     return fragColor;
 }
 
+vec4 mean(float _from,float _to) {
+
+    if(_from>1.0)
+        return vec4(0);
+
+    _from=iChannelResolution[1].x*_from;
+    _to=iChannelResolution[1].x*_to;
+
+    vec4 v=texelFetch(iChannel1, ivec2(_from,0),0) * (1.0-fract(_from)) ;
+
+    for(float i=ceil(_from); i<floor(_to); i++)
+        v+=texelFetch(iChannel1, ivec2(i,0),0) ;
+
+    if(floor(_to)>floor(_from))
+        v+=texelFetch(iChannel1,ivec2(_to,0),0)* fract(_to);
+    else
+        v-=texelFetch(iChannel1,ivec2(_to,0),0)*(1.0- fract(_to));
+
+    return v/(_to-_from);
+}
+
+
+
 float drawBar( vec2 fragCoord ) {
-    int pixel_x= int( fragCoord.x);
-    int pixel_y= int( fragCoord.y);
 
-    if(pixel_x%(pixel_fill+pixel_empty)<pixel_fill) {
-        float x=pixel_x/(pixel_fill+pixel_empty) /1.0/iResolution.x*(pixel_fill+pixel_empty) ;
-        vec3 rgb=getRGB(x);
+    if(int(fragCoord.x) %(pixel_fill+pixel_empty)<pixel_fill) {
+        float id=floor(fragCoord.x/(pixel_fill+pixel_empty));
 
-        vec4 sample1= texture(iChannel1, vec2(x,0)) ;
+        vec4 sample1=mean(id*(pixel_fill+pixel_empty)/iResolution.x,
+                          (1+id)*(pixel_fill+pixel_empty)/iResolution.x);
         float max_=sample1.g*.5+sample1.r*.5;
         if(fragCoord.y+1<=max_*height_ratio*iResolution.y)
             return 1.0;
@@ -49,6 +70,9 @@ float drawBar( vec2 fragCoord ) {
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     fragColor=drawSnow(fragCoord)*particle_strength;
     fragColor+=drawBar(fragCoord)*vec4(bar_color_and_opacity.rgb*bar_color_and_opacity.a, bar_color_and_opacity.a );
+
+    fragColor.a=0.0;
+
     fragColor.rgb+=background_color_and_opacity.rgb*background_color_and_opacity.a;
     fragColor.a+=background_color_and_opacity.a;
 }
