@@ -9,11 +9,5 @@
         "default": 2,
         "type": "int",
         "min":0
-    }, {
-        "name": "decay",
-        "default": 0.003,
-        "type": "double",
-        "max":1,
-        "min":0
     }]
 }
