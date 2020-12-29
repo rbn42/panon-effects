@@ -18,11 +18,10 @@ vec4 drawSnow(vec2 fragCoord ) {
         for(int i=1; i<min(128.0,iResolution.y); i++) {
             vec4 data= texelFetch(iChannel2,ivec2(fragCoord2.x,i), 0);
             if(data.g*255.>max_life_time )break;
-            float speed_y=(data.r*2+1)/3.;
-            float speed_x=80*(2*data.b-1);
-            float h=data.g*speed_y;
-            h=pow(0.000001, h)*iResolution.y*1.4;
-            float dist=length(fragCoord-vec2(fragCoord2.x+data.g*speed_x,h));
+            float dist_y=data.g*(data.r*2+1)/3.;
+            float dist_x=data.g*80*(2*data.b-1);
+            dist_y=pow(0.000001,dist_y)*iResolution.y*1.4;
+            float dist=length(fragCoord-vec2(fragCoord2.x+dist_x,dist_y));
             float alpha= (data.r)*(1-data.g*255./max_life_time)*1.0 /pow(dist,glow_strength ) ;
             fragColor+=  vec4(rgb*alpha,alpha);
         }
