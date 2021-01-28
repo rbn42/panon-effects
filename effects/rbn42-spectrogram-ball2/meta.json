@@ -9,7 +9,7 @@
         "type": "color"
     }, {
         "name": "ball_radius",
-        "default": 0.2,
+        "default": 0.25,
         "type": "double"
     }, {
         "name": "ball_x",
@@ -17,7 +17,7 @@
         "type": "double"
     }, {
         "name": "ball_y",
-        "default": 0.0,
+        "default": -0.2,
         "type": "double"
     }, {
         "name": "ball_z",
