@@ -9,7 +9,7 @@
         "type": "color"
     }, {
         "name": "radius",
-        "default": 0.25,
+        "default": 0.2,
         "type": "double"
     }, {
         "name": "center_x",
