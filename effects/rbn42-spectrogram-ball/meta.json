@@ -21,7 +21,7 @@
         "type": "double"
     }, {
         "name": "maxlife",
-        "default": 200,
+        "default": 150,
         "type": "double",
         "min":0
     }, {
@@ -31,6 +31,10 @@
     }, {
         "name": "strength",
         "default": 6,
+        "type": "double"
+    }, {
+        "name": "pow_exp",
+        "default": 3,
         "type": "double"
     }, {
         "name": "opacity",

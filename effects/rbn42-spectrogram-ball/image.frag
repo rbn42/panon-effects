@@ -8,6 +8,7 @@
 #define opacity $opacity
 #define radius $radius
 #define strength3 $strength
+#define pow_exp $pow_exp
 #define speed $speed
 #define center_x $center_x
 #define center_y $center_y
@@ -38,6 +39,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     y=y*maxlife/iResolution.y;
 
     fragColor= texture(iChannel2, vec2( x, y  ));
+    fragColor.r=pow(fragColor.r,pow_exp);
+    fragColor.g=pow(fragColor.g,pow_exp);
 
     fragColor.rgb=color*(lr?fragColor.r:fragColor.g)*strength3;
     fragColor.a=opacity+ max(fragColor.r,fragColor.g);
