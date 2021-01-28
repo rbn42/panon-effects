@@ -21,20 +21,37 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     bool lr=fragCoord.x<0;
 
     float point_radius=length(fragCoord);
-    float arc=asin(fragCoord.y/point_radius);
+    float arc=asin(fragCoord.y/point_radius);  // -pi/2 ~ pi/2
 
-    float x=0.5-arc/asin(1.0)/2;
+    float x=0.5-arc/asin(1.0)/2; // 0~1
     float y=(1-point_radius/circle_radius/radius/2);
+
+    if(y>0){
+        y=acos(1-y)/acos(0.0);
+
+        float spin=0;
+        if(lr){
+            x=x+y*spin;
+            if(x>1){
+                x=2-x;
+                lr=!lr;
+            }
+        }else{
+            x=x-y*spin;
+            if(x<0){
+                x=-x;
+               lr=!lr; 
+            }
+        }
+    }
+    if(y<0)
+        y=-y/speed;
 
     float x2=(2-x)/2;
     x2=lr?x2:(1-x2);
     vec3 color=x2*color_left.rgb+(1-x2)*color_right.rgb;
 
 
-    if(y>0)
-        y=acos(1-y)/acos(0.0);
-    if(y<0)
-        y=-y/speed;
 
     y=y*maxlife/iResolution.y;
 
