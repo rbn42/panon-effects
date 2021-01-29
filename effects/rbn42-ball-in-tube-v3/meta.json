@@ -1,11 +1,11 @@
 {
     "arguments": [{
         "name": "color_left",
-        "default": "#2088ff",
+        "default": "#8f0000",
         "type": "color"
     }, {
         "name": "color_right",
-        "default": "#ff2080",
+        "default": "#00088f",
         "type": "color"
     }, {
         "name": "ball_radius",

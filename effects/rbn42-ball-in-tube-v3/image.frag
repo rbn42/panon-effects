@@ -74,6 +74,7 @@ vec3 tube(vec3 pos2) {
     x2=lr?x2:(1-x2);
     vec3 color=x2*color_left.rgb+(1-x2)*color_right.rgb;
 
+    color+=getRGB(depth-iFrame/iResolution.y).rgb;
     vec4 s;
     s= texture(iChannel2, vec2( x,depth  ));
     s.r=pow(s.r,pow_exp);
