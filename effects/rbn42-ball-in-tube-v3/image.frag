@@ -144,7 +144,7 @@ vec3 sceneColor(vec3 rd,vec3 ro)
     vec3 point_tube=intersect_tube(ro,rd+ro);
     cubemap=tube(point_tube);
 
-    return sunLight(rd, light) + pow5(ground) * cubemap +
+    return sunLight(rd, light)*0 + pow5(ground) * cubemap +
            sky(rd, cubemap) * SCENE_COLOR;
 }
 
