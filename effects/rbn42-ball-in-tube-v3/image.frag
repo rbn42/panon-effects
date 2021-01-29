@@ -84,9 +84,6 @@ vec3 tube(vec3 pos2) {
     return s.rgb;
 }
 
-float arc(vec3 v1,vec3 v2) {
-    return acos(dot(v1,v2)/length(v2)/length(v1));
-}
 
 vec3 intersect_tube(vec3 p1,vec3 p2) {
 
@@ -185,9 +182,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     ray.dir=rd;
     //rd=vec3(uv,1);
 
-    float ball_radius_arc=asin( ball_radius / length(ro-ball_center));
-
-    bool in_ball=arc(rd,ball_center-ro)<ball_radius_arc;
 
     float t = sphere(ro, rd, ball_center, ball_radius);
     vec3 point_ball=(ro+rd*t);
