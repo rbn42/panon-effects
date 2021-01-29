@@ -8,11 +8,6 @@
         "default": "#ff2080",
         "type": "color"
     }, {
-
-        "name": "replace_ball_with_disk",
-        "default": false,
-        "type": "bool"
-    }, {
         "name": "ball_radius",
         "default": 0.26,
         "type": "double"
@@ -41,17 +36,12 @@
         "default": 0.01,
         "type": "double"
     }, {
-        "name": "maxlife",
-        "default": 150,
-        "type": "double",
-        "min":0
-    }, {
         "name": "speed",
         "default": 60,
         "type": "double"
     }, {
         "name": "camera_speed",
-        "default": 1,
+        "default": 0.1,
         "type": "double"
     }, {
         "name": "strength",
@@ -61,11 +51,5 @@
         "name": "pow_exp",
         "default": 3,
         "type": "double"
-    }, {
-        "name": "opacity",
-        "default": 1,
-        "type": "double",
-        "max":1,
-        "min":0
     }]
 }

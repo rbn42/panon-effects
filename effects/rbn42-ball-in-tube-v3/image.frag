@@ -1,11 +1,9 @@
 #version 130
 
-#define opacity $opacity
 
 #define color_left $color_left
 #define color_right $color_right
 
-#define opacity $opacity
 #define strength3 $strength
 #define pow_exp $pow_exp
 #define tube_depth $tube_depth
@@ -15,9 +13,6 @@
 #define ball_y $ball_y
 #define ball_z $ball_z
 #define camera_z $camera_z
-#define replace_ball_with_disk $replace_ball_with_disk
-
-#define maxlife $maxlife
 
 #define ball_radius $ball_radius
 #define tube_radius $tube_radius
