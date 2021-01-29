@@ -62,7 +62,6 @@ const float FRESNEL_BIAS  	   = 0.3;
 const float FRESNEL_SCALE 	   = 0.5;
 const float FRESNEL_POWER 	   = 0.8;
 
-const vec3 AMBIENT_LIGHT_COLOR = vec3(0.2);
 float fresnel(const in Ray ray, const vec3 normal)
 {
     return FRESNEL_BIAS + FRESNEL_SCALE * pow(clamp(1.0 + dot(ray.dir, normal), 0.0, 1.0), FRESNEL_POWER);
@@ -72,7 +71,7 @@ vec3 tube(vec3 pos2) {
     //if(pos2.y>0)return vec3(0);
     //if(pos2.x>0)return vec3(0);
     float depth=tube_depth-pos2.z/speed;
-    if(depth<0)return vec3(0);
+    //if(depth<0)return vec3(0);
     vec2 pos=pos2.xy/tube_radius;
     float x=0.5-asin(pos.y)/asin(1.0)/2; // 0~1, 0的位置是最高点
     bool lr=pos.x<0;
@@ -207,23 +206,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     vec3 bgColor =  sceneColor(ray.dir,ray.ori);
     vec3 reflectionColor = sceneColor(reflectRay.dir,reflectRay.ori);
 
-    fragColor.r=1;
-    fragColor.a=1;
     vec3 point_tube;
-    // disk reflection
-    // ball reflection
     vec3 refl=reflectRay.dir;
-    vec3 point_tube1=intersect_tube( point_ball,point_ball+refl); //,point_ball);
-    vec3 point_tube2=intersect_tube( point_ball,point_ball+refl); //,point_ball);
+    point_tube=intersect_tube( point_ball,point_ball+refl);
 
-
-    if( dot(ro-point_ball,ball_center-point_ball)*dot(point_tube1-point_ball,ball_center-point_ball)>0) {
-        point_tube=point_tube1;
-    } else {
-        point_tube=point_tube2;
-    }
     vec3 reflection = 2.0 * 0.5 * pow(tube(point_tube).rgb, vec3(1.0)) * fresnel;
     reflectionColor += reflection;
-    vec3 color = mix(bgColor, reflectionColor, 0.8) + AMBIENT_LIGHT_COLOR;
+    vec3 color = mix(bgColor, reflectionColor, 0.8) ;
     fragColor = vec4(color, 1.0);
 }
