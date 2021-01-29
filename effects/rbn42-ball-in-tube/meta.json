@@ -1,11 +1,11 @@
 {
     "arguments": [{
         "name": "color_left",
-        "default": "#2088ff",
+        "default": "#00ff2a",
         "type": "color"
     }, {
         "name": "color_right",
-        "default": "#ff2080",
+        "default": "#3c00ff",
         "type": "color"
     }, {
         "name": "radius",
