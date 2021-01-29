@@ -49,13 +49,13 @@ struct Ray
 
 float sphere(vec3 ray, vec3 dir, vec3 center, float radius)
 {
-	vec3 rc = ray-center;
-	float c = dot(rc, rc) - (radius*radius);
-	float b = dot(dir, rc);
-	float d = b*b - c;
-	float t = -b - sqrt(abs(d));
-	float st = step(0.0, min(t,d));
-	return mix(-1.0, t, st);
+    vec3 rc = ray-center;
+    float c = dot(rc, rc) - (radius*radius);
+    float b = dot(dir, rc);
+    float d = b*b - c;
+    float t = -b - sqrt(abs(d));
+    float st = step(0.0, min(t,d));
+    return mix(-1.0, t, st);
 }
 
 const float FRESNEL_BIAS  	   = 0.3;
@@ -119,44 +119,6 @@ vec3 intersect_tube(vec3 p1,vec3 p2) {
 
 }
 
-vec3 intersect_ball(vec3 p1,vec3 p2,bool neg) {
-    //ro,rd+ro的延长线，和x*x+y*y=C的交点，就是tube，要解开这个方程式
-    vec3 rd=p1-p2;
-    vec3 point_tube;
-    //(X-bx)*(X-bx)+(Y-by)*(Y-by)+(Z-bz)*(Z-bz)=R*R
-    float xa=rd.x;
-    float xb=-p2.z*rd.x+p2.x*rd.z-ball_x*rd.z;
-    float ya=rd.y;
-    float yb=-p2.z*rd.y+p2.y*rd.z-ball_y*rd.z;
-    float za=rd.z;
-    float zb=-p2.z*rd.z+p2.z*rd.z-ball_z*rd.z;
-
-    float formula_a=rd.x*rd.x+rd.y*rd.y+rd.z*rd.z;
-    float formula_b=2*(xa*xb+ya*yb+za*zb);
-    float formula_c=  -ball_radius*ball_radius*rd.z*rd.z;
-    formula_c+=xb*xb+yb*yb+zb*zb;
-    //if(formula_b*formula_b-4*formula_a*formula_c<0)
-    //    return vec3(0,0,0);
-
-    point_tube.z=(-formula_b+(neg?-1:1)*sqrt(formula_b*formula_b-4*formula_a*formula_c))/2/formula_a;
-    point_tube.x=p2.x+(point_tube.z-p2.z)/rd.z*rd.x;
-    point_tube.y=p2.y+(point_tube.z-p2.z)/rd.z*rd.y;
-    return point_tube;
-
-}
-
-vec3 intersect_disk(vec3 p1,vec3 p2) {
-    vec3 rd=p1-p2;
-    vec3 point_tube;
-    point_tube.z=ball_z;
-    point_tube.x=p2.x+(point_tube.z-p2.z)/rd.z*rd.x;
-    point_tube.y=p2.y+(point_tube.z-p2.z)/rd.z*rd.y;
-    return point_tube;
-
-}
-
-
-
 const vec3 GROUND_DIR 	       = vec3(0.0, 1.0, 0.0);
 const vec3 SKY_DIR    	 	   = vec3(0.0, 1.0, 0.0);
 
@@ -181,14 +143,14 @@ vec3 sunLight(vec3 rd, vec3 lightDir)
 
 vec3 sceneColor(vec3 rd,vec3 ro)
 {
-  	vec3   light = normalize(vec3(sin(iGlobalTime), 0.8, cos(iGlobalTime)));
+    vec3   light = normalize(vec3(sin(iGlobalTime), 2.8, cos(iGlobalTime)-30));
     float  ground = max(0.0, dot(rd, -GROUND_DIR));
     vec3   cubemap =vec3(0);// texture(iChannel0, rd).rgb;
 
-        vec3 point_tube=intersect_tube(ro,rd+ro);
-        cubemap=tube(point_tube);
+    vec3 point_tube=intersect_tube(ro,rd+ro);
+    cubemap=tube(point_tube);
 
-   	return sunLight(rd, light) + pow5(ground) * cubemap +
+    return sunLight(rd, light) + pow5(ground) * cubemap +
            sky(rd, cubemap) * SCENE_COLOR;
 }
 
@@ -242,32 +204,26 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     float fresnel = fresnel(reflectRay, nml);
 
-    vec3 bgColor =  sceneColor(ray.dir,ray.ori);	
+    vec3 bgColor =  sceneColor(ray.dir,ray.ori);
     vec3 reflectionColor = sceneColor(reflectRay.dir,reflectRay.ori);
 
-        fragColor.r=1;
-        fragColor.a=1;
-        vec3 point_tube;
-        // disk reflection
-        if(replace_ball_with_disk) {
-            point_ball=intersect_disk(ro,rd+ro);
-            vec3 refl=reflect(ro-point_ball,normalize(vec3(0,0,1)));
-            point_tube=intersect_tube( point_ball,point_ball+refl); //,point_ball);
-        } else {
-            // ball reflection
-            vec3 refl=reflectRay.dir;
-            vec3 point_tube1=intersect_tube( point_ball,point_ball+refl); //,point_ball);
-            vec3 point_tube2=intersect_tube( point_ball,point_ball+refl); //,point_ball);
+    fragColor.r=1;
+    fragColor.a=1;
+    vec3 point_tube;
+    // disk reflection
+    // ball reflection
+    vec3 refl=reflectRay.dir;
+    vec3 point_tube1=intersect_tube( point_ball,point_ball+refl); //,point_ball);
+    vec3 point_tube2=intersect_tube( point_ball,point_ball+refl); //,point_ball);
 
 
-            if( dot(ro-point_ball,ball_center-point_ball)*dot(point_tube1-point_ball,ball_center-point_ball)>0) {
-                point_tube=point_tube1;
-            } else {
-                point_tube=point_tube2;
-            }
-        }
-        vec3 reflection = 2.0 * 0.5 * pow(tube(point_tube).rgb, vec3(1.0)) * fresnel;
-        reflectionColor += reflection;
-        vec3 color = mix(bgColor, reflectionColor, 0.8) + AMBIENT_LIGHT_COLOR;
-        fragColor = vec4(color, 1.0);
+    if( dot(ro-point_ball,ball_center-point_ball)*dot(point_tube1-point_ball,ball_center-point_ball)>0) {
+        point_tube=point_tube1;
+    } else {
+        point_tube=point_tube2;
+    }
+    vec3 reflection = 2.0 * 0.5 * pow(tube(point_tube).rgb, vec3(1.0)) * fresnel;
+    reflectionColor += reflection;
+    vec3 color = mix(bgColor, reflectionColor, 0.8) + AMBIENT_LIGHT_COLOR;
+    fragColor = vec4(color, 1.0);
 }
