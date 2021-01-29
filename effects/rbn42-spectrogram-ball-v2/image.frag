@@ -8,11 +8,13 @@
 #define opacity $opacity
 #define strength3 $strength
 #define pow_exp $pow_exp
+#define tube_depth $tube_depth
 #define speed $speed
 #define ball_x $ball_x
 #define ball_y $ball_y
 #define ball_z $ball_z
 #define camera_z $camera_z
+#define replace_ball_with_disk $replace_ball_with_disk
 
 #define maxlife $maxlife
 
@@ -37,17 +39,15 @@ y=0的位置是当前音频， 和球不是一个位置，而是从视角出发�
  */
 
 vec3 tube(vec3 pos2){
-    /*
-    if(pos2.z>0)return vec3(0,0,0);
-    if(pos2.x<0)return vec3(0,0,0);
-    return vec3(-pos2.z/3,0,0);
-    */
-    float depth=0.05-pos2.z/speed;
+    //if(pos2.y>0)return vec3(0);
+    //if(pos2.x>0)return vec3(0);
+    float depth=tube_depth-pos2.z/speed;
+    if(depth<0)return vec3(0);
     vec2 pos=pos2.xy/tube_radius;
-    float x=0.5-asin(pos.y)/asin(1.0)/2; // 0~1
+    float x=0.5-asin(pos.y)/asin(1.0)/2; // 0~1, 0的位置是最高点
     bool lr=pos.x<0;
     float x2=(2-x)/2;
-    x2=lr?x:(1-x2);
+    x2=lr?x2:(1-x2);
     vec3 color=x2*color_left.rgb+(1-x2)*color_right.rgb;
 
     vec4 s= texture(iChannel2, vec2( x,depth  ));
@@ -109,30 +109,50 @@ vec3 intersect_ball(vec3 p1,vec3 p2,bool neg){
 
 }
 
+vec3 intersect_disk(vec3 p1,vec3 p2){
+    vec3 rd=p1-p2;
+    vec3 point_tube;
+    point_tube.z=ball_z;
+    point_tube.x=p2.x+(point_tube.z-p2.z)/rd.z*rd.x;
+    point_tube.y=p2.y+(point_tube.z-p2.z)/rd.z*rd.y;
+    return point_tube;
+
+}
+
+
 
 
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
+    //0,-0.2,0.2
     vec3 ball_center=vec3(ball_x,ball_y,ball_z);
 
-    vec2 uv=fragCoord / min(iResolution.x,iResolution.y) -0.5;
+    // -0.5 ~ 0.5
+    vec2 uv=(fragCoord - iResolution.xy/2) / min(iResolution.x,iResolution.y) ;
     
     //ray origin, camera,相对uv屏幕中心0,0
+    //0,0,-1.3
     vec3 ro=vec3(sin(iTime*spin_speed)/8,cos(iTime*spin_speed)/20,camera_z);
-    //ro=vec3(0,0,camera_z);
     //rd=vec3(uv,screen)-ro,透过uv到camera的射线
     vec3 lookat = vec3(0,0,0);
     
     float zoom = 1.;
     
+    //0,0,1
     vec3 f = normalize(lookat-ro);
+    //1,0,0
     vec3 r = cross(vec3(0., 1., 0.), f);
+    //0,1,0
     vec3 u = cross(f, r);
     
+    //0,0,-0.3
     vec3 c = ro + f*zoom;
+    //uv+0,0,-0.3
     vec3 i = c + uv.x*r + uv.y*u;
+    //uv+0,0,1
     vec3 rd = i-ro;
+    rd=vec3(uv,1);
     
     float ball_radius_arc=asin( ball_radius / length(ro-ball_center));
     bool in_ball=arc(rd,ball_center-ro)<ball_radius_arc;
@@ -147,6 +167,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         }else{
             point_ball=point_ball2;
         }
+
+        // ball reflection
         vec3 refl=reflect(ro-point_ball,normalize(ball_center-point_ball));
         vec3 point_tube1=intersect_tube( point_ball,point_ball+refl,true); //,point_ball);
         vec3 point_tube2=intersect_tube( point_ball,point_ball+refl,false); //,point_ball);
@@ -157,12 +179,19 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         }else{
             point_tube=point_tube2;
         }
+        // disk reflection
+        if(replace_ball_with_disk){
+        point_ball=intersect_disk(ro,rd+ro);
+        refl=reflect(ro-point_ball,normalize(vec3(0,0,1)));
+        point_tube=intersect_tube( point_ball,point_ball+refl,true); //,point_ball);
+        }
+
         //point_tube=intersect_tube( ball_center,point_ball,false);
         fragColor.rgb=tube(point_tube);
         //fragColor.rgb=(ball_center-point_ball)/ball_radius;
         //fragColor.rg=(point_tube.xy)/ball_radius;
     }else{
-        vec3 point_tube=intersect_tube(ro,rd+ro,true);
+        vec3 point_tube=intersect_tube(ro,rd+ro,false);
         fragColor.rgb=tube(point_tube);
         fragColor.a=1;
     }

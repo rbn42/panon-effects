@@ -8,8 +8,13 @@
         "default": "#ff2080",
         "type": "color"
     }, {
+
+        "name": "replace_ball_with_disk",
+        "default": false,
+        "type": "bool"
+    }, {
         "name": "ball_radius",
-        "default": 0.25,
+        "default": 0.26,
         "type": "double"
     }, {
         "name": "ball_x",
@@ -17,7 +22,7 @@
         "type": "double"
     }, {
         "name": "ball_y",
-        "default": -0.2,
+        "default": -0.0,
         "type": "double"
     }, {
         "name": "ball_z",
@@ -29,7 +34,11 @@
         "type": "double"
     }, {
         "name": "tube_radius",
-        "default": 0.4,
+        "default": 0.3,
+        "type": "double"
+    }, {
+        "name": "tube_depth",
+        "default": 0.01,
         "type": "double"
     }, {
         "name": "maxlife",
