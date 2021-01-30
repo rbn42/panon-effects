@@ -15,7 +15,7 @@
 #define camera_z $camera_z
 
 #define ball_radius $ball_radius
-#define tube_radius $tube_radius
+#define tube_radius $ball_radius
 
 #define pow5(x) pow(x, 5.0)
 //设定视角到球心距离是1
