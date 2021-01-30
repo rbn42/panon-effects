@@ -6,7 +6,6 @@
 
 #define strength3 $strength
 #define pow_exp $pow_exp
-#define tube_depth $tube_depth
 #define speed $speed
 #define camera_speed $camera_speed
 #define ball_x $ball_x
@@ -65,7 +64,7 @@ float fresnel(const in Ray ray, const vec3 normal)
 vec3 tube(vec3 pos2) {
     //if(pos2.y>0)return vec3(0);
     //if(pos2.x>0)return vec3(0);
-    float depth=tube_depth-pos2.z/speed;
+    float depth=-pos2.z/speed;
     //if(depth<0)return vec3(0);
     vec2 pos=pos2.xy/tube_radius;
     float x=0.5-asin(pos.y)/asin(1.0)/2; // 0~1, 0的位置是最高点
