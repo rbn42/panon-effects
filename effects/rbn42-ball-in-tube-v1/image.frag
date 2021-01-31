@@ -60,5 +60,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     fragColor.rgb=color*(lr?fragColor.r:fragColor.g)*strength3;
     fragColor.a=opacity+ max(max(fragColor.r,fragColor.g),fragColor.b);
+    fragColor.a=opacity;
     
 }

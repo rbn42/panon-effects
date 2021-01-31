@@ -195,4 +195,5 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         fragColor.a=1;
     }
     fragColor.a=opacity+ max(max(fragColor.r,fragColor.g),fragColor.b);
+    fragColor.a=opacity;
 }
