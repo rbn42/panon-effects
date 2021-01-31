@@ -5,7 +5,6 @@
 #define color_left $color_left
 #define color_right $color_right
 
-#define opacity $opacity
 #define radius $radius
 #define strength3 $strength
 #define pow_exp $pow_exp
@@ -60,6 +59,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     fragColor.g=pow(fragColor.g,pow_exp);
 
     fragColor.rgb=color*(lr?fragColor.r:fragColor.g)*strength3;
-    fragColor.a=opacity+ max(fragColor.r,fragColor.g);
+    fragColor.a=opacity+ max(max(fragColor.r,fragColor.g),fragColor.b);
     
 }

@@ -1,6 +1,5 @@
 #version 130
 
-#define opacity $opacity
 
 #define color_left $color_left
 #define color_right $color_right
@@ -195,4 +194,5 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         fragColor.rgb=tube(point_tube);
         fragColor.a=1;
     }
+    fragColor.a=opacity+ max(max(fragColor.r,fragColor.g),fragColor.b);
 }

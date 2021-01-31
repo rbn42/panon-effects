@@ -1,6 +1,7 @@
 #version 130
 
 
+#define opacity $opacity
 #define color_left $color_left
 #define color_right $color_right
 
@@ -203,4 +204,5 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     reflectionColor += reflection;
     vec3 color = mix(bgColor, reflectionColor, 0.8) ;
     fragColor = vec4(color, 1.0);
+    fragColor.a=opacity+ max(max(max(fragColor.r,fragColor.g),fragColor.b),0);
 }

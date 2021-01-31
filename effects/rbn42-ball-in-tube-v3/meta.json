@@ -43,5 +43,11 @@
         "name": "pow_exp",
         "default": 3,
         "type": "double"
+    }, {
+        "name": "opacity",
+        "default": 1,
+        "type": "double",
+        "max":1,
+        "min":0
     }]
 }
