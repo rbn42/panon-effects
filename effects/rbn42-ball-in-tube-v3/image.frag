@@ -17,6 +17,9 @@
 #define ball_radius $ball_radius
 #define tube_radius $ball_radius
 
+#define layout_w $layout_w
+#define layout_h $layout_h
+
 #define pow5(x) pow(x, 5.0)
 //设定视角到球心距离是1
 
@@ -148,17 +151,23 @@ vec3 sceneColor(vec3 rd,vec3 ro)
 
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 layout_id=floor(fragCoord/iResolution.xy *vec2(layout_w,layout_h));
+    vec2 gridRes=iResolution.xy/vec2(layout_w,layout_h);
+
+    fragCoord=fract( fragCoord*vec2(layout_w,layout_h)/iResolution.xy)*gridRes.xy;
 
     //0,-0.2,0.2
     vec3 ball_center=vec3(ball_x,ball_y,ball_z);
 
     // -0.5 ~ 0.5
-    vec2 uv=(fragCoord*2 - iResolution.xy) / min(iResolution.x,iResolution.y) /2;
+    vec2 uv=(fragCoord*2 - gridRes.xy) / min(gridRes.x,gridRes.y) /2;
 
     Ray ray;
     //ray origin, camera,相对uv屏幕中心0,0
     //0,0,-1.3
-    ray.ori=vec3(sin(iTime*camera_speed)/8,cos(iTime*camera_speed)/20,camera_z);
+    float cs=camera_speed; //*(1+layout_id.x+layout_id.y*layout_w);
+    
+    ray.ori=vec3(sin(iTime*cs)/8,cos(iTime*cs)/20,camera_z);
 
     vec3 ro=ray.ori;
     //rd=vec3(uv,screen)-ro,透过uv到camera的射线

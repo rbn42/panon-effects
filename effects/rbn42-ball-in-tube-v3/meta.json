@@ -8,6 +8,16 @@
         "default": "#00088f",
         "type": "color"
     }, {
+        "name": "layout_w",
+        "default": 1,
+        "type": "int",
+        "min":1
+    }, {
+        "name": "layout_h",
+        "default": 1,
+        "type": "int",
+        "min":1
+    }, {
         "name": "ball_radius",
         "default": 0.2,
         "type": "double"
