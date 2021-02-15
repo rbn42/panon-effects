@@ -2,9 +2,6 @@
 
 #define opacity $opacity
 
-#define color_left $color_left
-#define color_right $color_right
-
 #define radius $radius
 #define strength3 $strength
 #define pow_exp $pow_exp
@@ -48,7 +45,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     float x2=(2-x)/2;
     x2=lr?x2:(1-x2);
-    vec3 color=(1-x)*color_left.rgb+(x)*color_right.rgb;
+    vec3 color=getRGB(lr?x:(1-x));//(1-x)*color_left.rgb+(x)*color_right.rgb;
 
 
 
