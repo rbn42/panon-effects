@@ -22,7 +22,7 @@
         "type": "double"
     }, {
         "name": "strength",
-        "default": 6,
+        "default": 3,
         "type": "double"
     }, {
         "name": "pow_exp",
