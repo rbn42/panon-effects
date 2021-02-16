@@ -45,6 +45,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     float x2=(2-x)/2;
     x2=lr?x2:(1-x2);
+    x=1-x;
     vec3 color=getRGB(lr?x:(1-x));//(1-x)*color_left.rgb+(x)*color_right.rgb;
 
 
