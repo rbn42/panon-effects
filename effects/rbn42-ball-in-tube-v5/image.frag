@@ -1,6 +1,7 @@
 #version 130
 
-#define opacity $opacity
+#define leaf_opacity $leaf_opacity
+#define center_opacity $center_opacity
 #define avg $avg
 #define radius $radius
 #define strength3 $strength
@@ -63,7 +64,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     fragColor=fun1(x1,y,false)+fun1(x2,y,true);
 
-    fragColor.a=opacity+ max(max(fragColor.r,fragColor.g),fragColor.b);
-    fragColor.a=opacity;
-
+    fragColor.a= max(max(fragColor.r,fragColor.g),fragColor.b);
+    fragColor.a=fragColor.a>0.05?leaf_opacity:0;
+    fragColor.a=y>0?center_opacity:fragColor.a;
 }
