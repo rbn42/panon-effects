@@ -34,6 +34,12 @@
         "default": 8,
         "type": "double"
     }, {
+        "name": "leaf_threshold",
+        "default": 0.15,
+        "type": "double",
+        "max":1,
+        "min":0
+    }, {
         "name": "center_opacity",
         "default": 1,
         "type": "double",

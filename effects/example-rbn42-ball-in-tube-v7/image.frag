@@ -1,7 +1,9 @@
 #version 130
 
 #define leaf_opacity $leaf_opacity
+#define leaf_threshold $leaf_threshold
 #define center_opacity $center_opacity
+
 #define avg $avg
 #define radius $radius
 #define strength3 $strength
@@ -14,6 +16,7 @@
 
 vec4 fun1(float x,float y,bool lr) {
     if(x>=1)return vec4(0);
+    bool inball=y>0;
     if(y>0)
         y=acos(1-y)/acos(0.0);
     if(y<0)
@@ -35,14 +38,17 @@ vec4 fun1(float x,float y,bool lr) {
     vec4 c11= texelFetch(iChannel2, ivec2(ceil(x),ceil(y)  ),0);
     float fx=fract(x);
     float fy=fract(y);
-    fx=pow(fx,20);
-    fy=pow(fy,20);
+    fx=fx<0.5?pow(fx,20):(1-pow(1-fx,20));
+    fy=fy<0.5?pow(fy,20):(1-pow(1-fy,20));
     vec4 fragColor=(fx*c10+(1-fx)*c00)*(1-fy)+fy*(fx*c11+(1-fx)*c01);
 
-    fragColor.r=pow(fragColor.r,pow_exp);
-    fragColor.g=pow(fragColor.g,pow_exp);
+    fragColor=c00;
 
-    fragColor.rgb=color*(lr?fragColor.r:fragColor.g)*strength3;
+    fragColor.a=pow((lr?fragColor.r:fragColor.g),pow_exp);
+    fragColor.rgb=color*fragColor.a*strength3;
+    fragColor.a=fragColor.a>leaf_threshold ?leaf_opacity:0;
+    fragColor.a=inball?center_opacity:fragColor.a;
+
     return fragColor;
 
 }
@@ -64,7 +70,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     fragColor=fun1(x1,y,false)+fun1(x2,y,true);
 
-    fragColor.a= max(max(fragColor.r,fragColor.g),fragColor.b);
-    fragColor.a=fragColor.a>0.05?leaf_opacity:0;
-    fragColor.a=y>0?center_opacity:fragColor.a;
 }
