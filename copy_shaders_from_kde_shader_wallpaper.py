@@ -6,11 +6,14 @@ l=glob.glob(path_root+'*.frag')
 for p in l:
     name= os.path.splitext(os.path.split(p)[1])[0]
     path_dst=f'./effects/ksw-{name}'
-    if not os.path.exists(path_dst):
-        os.mkdir(path_dst)
     image_properties=[line for line in open(p) if line.startswith('// property Image iChannel')]
 
-    if (len(image_properties))>1:continue
+    if (len(image_properties))>1:
+        print(f'{name} has too many images')
+        continue
+
+    if not os.path.exists(path_dst):
+        os.mkdir(path_dst)
 
     shader_src=open(p).read()
     shader_src=shader_src.replace('iChannel0','iChannel3')
